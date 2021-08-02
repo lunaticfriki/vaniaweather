@@ -1,5 +1,11 @@
 require('colors')
-const { inquirerMenu, pause, readInput } = require('./helpers/inquirer')
+require('dotenv').config()
+const {
+  inquirerMenu,
+  pause,
+  readInput,
+  listPlaces,
+} = require('./helpers/inquirer')
 const Searches = require('./models/search')
 
 const main = async () => {
@@ -13,16 +19,17 @@ const main = async () => {
     switch (option) {
       case 1:
         const place = await readInput('Place: ')
-        await searches.searchPlace(place)
-        console.log('\n', place)
-        console.log('\nCity info\n'.magenta)
-        console.log('City:')
-        console.log('Latitude:')
-        console.log('Longitude:')
-        console.log('Temperature:')
-        console.log('Min.')
-        console.log('Max.')
-        console.log('Current weather:')
+
+        const places = await searches.searchPlace(place)
+        const id = await listPlaces(places)
+
+        const selectedPlace = places.find((place) => place.id === id)
+        const placeName = `${selectedPlace.name}`.green
+
+        console.log(`\n- Info of : ${placeName} -\n`.magenta)
+        console.log('City:', selectedPlace.name)
+        console.log('Latitude:', selectedPlace.lat)
+        console.log('Longitude:', selectedPlace.lng)
         break
       case 2:
         break

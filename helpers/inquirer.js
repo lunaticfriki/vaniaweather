@@ -19,6 +19,7 @@ const inquirerMenu = async () => {
   /**
    * Don't touch this logs in order to see a beautiful aligned heading :D
    */
+  console.log()
   console.log(' =============================='.yellow)
   console.log(` == ${'WELCOME TO VANIAWEATHER!'.toUpperCase()} ==`.rainbow)
   console.log(' ==============================\n'.yellow)
@@ -61,17 +62,13 @@ const readInput = async (message) => {
   return description
 }
 
-const tasksToDeleteList = async (tasks = []) => {
-  const choices = tasks.map((task, idx) => {
+const listPlaces = async (places = []) => {
+  const choices = places.map((place, idx) => {
     const index = `${idx + 1}.`.magenta
 
     return {
-      value: task.id,
-      name: `${index} ${task.description}: ${
-        task.completedIn
-          ? `Completed in ${task.completedIn}`.green
-          : 'Pending'.red
-      }`,
+      value: place.id,
+      name: `${index} ${place.name}`,
     }
   })
 
@@ -86,7 +83,7 @@ const tasksToDeleteList = async (tasks = []) => {
     {
       type: 'list',
       name: 'id',
-      message: 'Delete',
+      message: 'Choose place: ',
       choices,
     },
   ]
@@ -143,7 +140,7 @@ module.exports = {
   inquirerMenu,
   pause,
   readInput,
-  tasksToDeleteList,
+  listPlaces,
   confirmChoice,
   tasksToComplete,
 }
