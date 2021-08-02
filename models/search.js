@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 class Searches {
   history = ['Vilassar', 'Barcelona', 'Osaka', 'Tokyo']
 
@@ -6,7 +8,9 @@ class Searches {
   }
 
   async searchPlace(place = '') {
-    console.log(place)
+    // console.log('Place:', place)
+    const res = await axios.get('https://reqres.in/api/users?page=2')
+    console.log(res.data.per_page)
 
     return []
   }

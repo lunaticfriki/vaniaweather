@@ -13,6 +13,7 @@ const main = async () => {
     switch (option) {
       case 1:
         const place = await readInput('Place: ')
+        await searches.searchPlace(place)
         console.log('\n', place)
         console.log('\nCity info\n'.magenta)
         console.log('City:')
