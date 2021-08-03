@@ -24,12 +24,29 @@ const main = async () => {
         const id = await listPlaces(places)
 
         const selectedPlace = places.find((place) => place.id === id)
-        const placeName = `${selectedPlace.name}`.green
+        const placeName = `${selectedPlace.name}`.cyan
 
-        console.log(`\n- Info of : ${placeName} -\n`.magenta)
-        console.log('City:', selectedPlace.name)
-        console.log('Latitude:', selectedPlace.lat)
-        console.log('Longitude:', selectedPlace.lng)
+        const weather = await searches.searchWeather(
+          selectedPlace.lat,
+          selectedPlace.lng
+        )
+
+        const city = `${selectedPlace.name}`.magenta
+        const longitude = `${selectedPlace.lng}`.magenta
+        const latitude = `${selectedPlace.lat}`.magenta
+        const temperature = `${weather.temperature}`.magenta
+        const min = `${weather.min}`.magenta
+        const max = `${weather.max}`.magenta
+        const description = `${weather.description}`.magenta
+
+        console.log(`\n- Weather report of : ${placeName} -\n`.magenta)
+        console.log(`City: ${city}`.cyan)
+        console.log(`Longitude: ${longitude}`.cyan)
+        console.log(`Latitude: ${latitude}`.cyan)
+        console.log(`Temperature: ${temperature}°C`.cyan)
+        console.log(`Min: ${min}°C`.cyan)
+        console.log(`Max: ${max}°C`.cyan)
+        console.log(`Curent weather: ${description}`.cyan)
         break
       case 2:
         break

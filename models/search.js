@@ -15,6 +15,13 @@ class Searches {
     }
   }
 
+  get paramsOpenWeather() {
+    return {
+      appid: process.env.OPEN_WEATHER_KEY,
+      units: 'metric',
+    }
+  }
+
   async searchPlace(place = '') {
     try {
       const instance = axios.create({
@@ -32,6 +39,35 @@ class Searches {
       }))
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  async searchWeather(lat, lon) {
+    try {
+      const instance = axios.create({
+        baseURL: 'https://api.openweathermap.org/data/2.5/weather',
+        params: { ...this.paramsOpenWeather, lat, lon },
+      })
+
+      const res = await instance.get()
+
+      const {
+        weather,
+        main: { temp, temp_min, temp_max },
+      } = res.data
+
+      const description =
+        weather[0].description.charAt(0).toUpperCase() +
+        weather[0].description.slice(1)
+
+      return {
+        description,
+        min: temp_min,
+        max: temp_max,
+        temperature: temp,
+      }
+    } catch (error) {
+      console.log(error, 'Place not found')
     }
   }
 }

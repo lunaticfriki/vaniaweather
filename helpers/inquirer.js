@@ -21,7 +21,7 @@ const inquirerMenu = async () => {
    */
   console.log()
   console.log(' =============================='.yellow)
-  console.log(` == ${'WELCOME TO VANIAWEATHER!'.toUpperCase()} ==`.rainbow)
+  console.log(` == ${'WELCOME TO VANIAWEATHER!'.toUpperCase()} ==`.cyan)
   console.log(' ==============================\n'.yellow)
   /**
    * End of the beautiful aligned heading ^_^
