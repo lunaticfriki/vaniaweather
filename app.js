@@ -23,8 +23,12 @@ const main = async () => {
         const places = await searches.searchPlace(place)
         const id = await listPlaces(places)
 
+        if (id === places.length + 1) continue
+
         const selectedPlace = places.find((place) => place.id === id)
         const placeName = `${selectedPlace.name}`.cyan
+
+        searches.addHistory(selectedPlace.name)
 
         const weather = await searches.searchWeather(
           selectedPlace.lat,
@@ -49,8 +53,11 @@ const main = async () => {
         console.log(`Curent weather: ${description}`.cyan)
         break
       case 2:
-        break
-      case 3:
+        console.log()
+        searches.capitalizedHistory.forEach((place, idx) => {
+          const index = `${idx + 1}. `.cyan
+          console.log(`${index}${place}`)
+        })
         break
     }
 
