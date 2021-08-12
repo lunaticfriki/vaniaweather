@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 require('colors')
 require('dotenv').config()
 const {

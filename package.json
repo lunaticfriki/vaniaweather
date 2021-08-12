@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node app.js"
   },
+  "bin": {
+    "vaniaweather": "./app.js"
+  },
   "keywords": [],
   "author": "lunaticfriki",
   "license": "ISC",
